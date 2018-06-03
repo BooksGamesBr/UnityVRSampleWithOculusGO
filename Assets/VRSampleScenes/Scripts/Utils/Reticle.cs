@@ -51,18 +51,29 @@ namespace VRStandardAssets.Utils
 
 
         // This overload of SetPosition is used when the the VREyeRaycaster hasn't hit anything.
-        public void SetPosition ()
-        {
-            // Set the position of the reticle to the default distance in front of the camera.
-            m_ReticleTransform.position = m_Camera.position + m_Camera.forward * m_DefaultDistance;
+        //public void SetPosition ()
+        //{
+        //    // Set the position of the reticle to the default distance in front of the camera.
+        //    m_ReticleTransform.position = m_Camera.position + m_Camera.forward * m_DefaultDistance;
+
+        //    // Set the scale based on the original and the distance from the camera.
+        //    m_ReticleTransform.localScale = m_OriginalScale * m_DefaultDistance;
+
+        //    // The rotation should just be the default.
+        //    m_ReticleTransform.localRotation = m_OriginalRotation;
+        //}
+
+        // Controller
+		public void SetPosition(Vector3 position, Vector3 forward) {
+			// Set the position of the reticle to the default distance in front of the camera.
+			m_ReticleTransform.position = position + forward * m_DefaultDistance;
 
             // Set the scale based on the original and the distance from the camera.
             m_ReticleTransform.localScale = m_OriginalScale * m_DefaultDistance;
-
-            // The rotation should just be the default.
+           
+			// The rotation should just be the default.
             m_ReticleTransform.localRotation = m_OriginalRotation;
-        }
-
+		}
 
         // This overload of SetPosition is used when the VREyeRaycaster has hit something.
         public void SetPosition (RaycastHit hit)
