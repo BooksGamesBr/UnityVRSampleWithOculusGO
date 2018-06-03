@@ -39,6 +39,9 @@ namespace VRStandardAssets.ShootingGallery
         public bool IsPlaying { get; private set; }                     // Whether or not the game is currently playing.
 
 
+		[SerializeField] private VREyeRaycaster m_EyeRaycaster;
+
+
         private IEnumerator Start()
         {
             // Set the game type for the score to be recorded correctly.
@@ -86,6 +89,9 @@ namespace VRStandardAssets.ShootingGallery
 
         private IEnumerator PlayPhase ()
         {
+			if (m_EyeRaycaster != null) {
+				m_EyeRaycaster.ShowLineRenderer = false;
+			}
             // Wait for the UI on the player's gun to fade in.
             yield return StartCoroutine(m_UIController.ShowPlayerUI());
 
@@ -111,6 +117,9 @@ namespace VRStandardAssets.ShootingGallery
 
         private IEnumerator EndPhase ()
         {
+			if (m_EyeRaycaster != null) {
+				m_EyeRaycaster.ShowLineRenderer = true;
+			}
             // Hide the reticle since the radial is about to be used.
             m_Reticle.Hide ();
             
