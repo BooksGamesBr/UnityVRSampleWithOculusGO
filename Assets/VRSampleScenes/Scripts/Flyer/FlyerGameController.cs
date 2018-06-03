@@ -34,6 +34,9 @@ namespace VRStandardAssets.Flyer
         public bool IsGameRunning { get { return m_IsGameRunning; } }
 
 
+		[SerializeField] private VREyeRaycaster m_EyeRaycaster;
+
+
         private IEnumerator Start()
         {
             while (true)
@@ -91,6 +94,10 @@ namespace VRStandardAssets.Flyer
 
         private IEnumerator PlayPhase ()
         {
+			if (m_EyeRaycaster != null) {
+				m_EyeRaycaster.ShowLineRenderer = false;
+			}
+
             // The game is now running.
             m_IsGameRunning = true;
 
@@ -122,6 +129,10 @@ namespace VRStandardAssets.Flyer
 
         private IEnumerator EndPhase ()
         {
+			if (m_EyeRaycaster != null) {
+				m_EyeRaycaster.ShowLineRenderer = true;
+			}
+
             // Wait for the camera to fade out.
             yield return StartCoroutine(m_CameraFade.BeginFadeOut(m_IntroOutroFadeDuration, false));
 
